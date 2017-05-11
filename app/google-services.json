@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "489379606075",
+    "firebase_url": "https://mycalendar-f4e59.firebaseio.com",
+    "project_id": "mycalendar-f4e59",
+    "storage_bucket": "mycalendar-f4e59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489379606075:android:15fac297bdcdb5df",
+        "android_client_info": {
+          "package_name": "com.yube.MyCalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489379606075-k9nj5djmrpnbbbf6pfrpg2224or1hf8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBytpPiavORrcWYxBlVV-GbXNmwAWZCbNc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489379606075:android:04fb2e04b2333e25",
+        "android_client_info": {
+          "package_name": "com.yube.caly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489379606075-d46krcae3g9a81bv4i2u39762k7bqauc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yube.caly",
+            "certificate_hash": "8ad3df6ebdaef8e5c0f7c232a33f9c780fe4faf2"
+          }
+        },
+        {
+          "client_id": "489379606075-k9nj5djmrpnbbbf6pfrpg2224or1hf8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBytpPiavORrcWYxBlVV-GbXNmwAWZCbNc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489379606075-k9nj5djmrpnbbbf6pfrpg2224or1hf8m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
