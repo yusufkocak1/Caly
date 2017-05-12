@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Caly</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
     <string name="action_settings">Settings</string>
@@ -10,43 +9,43 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="prompt_password">Parola (optional)</string>
+    <string name="action_sign_in">Üye ol</string>
+    <string name="action_sign_in_short">Üye ol</string>
+    <string name="error_invalid_email">Bu e-posta adresi geçersiz!</string>
+    <string name="error_invalid_password">Bu Parola çok kısa!</string>
+    <string name="error_incorrect_password">Parola yanlış</string>
+    <string name="error_field_required">Bu alan gereklidir!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
 
     <string name="email">Email</string>
-    <string name="minimum_password">şifreniz minimum 6 karekter olmalı</string>
-    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
-    <string name="change_email">Change Email</string>
-    <string name="change_password">Change Password</string>
-    <string name="send_password_reset_email">Send Password reset email</string>
-    <string name="remove_user">Remove user</string>
-    <string name="new_pass">New Password</string>
+    <string name="minimum_password">parolanız minimum 6 karekter olmalı</string>
+    <string name="auth_failed">Kimlik doğrulama başarısız oldu, e-postanızı ve şifrenizi kontrol edin veya kaydolun</string>
+    <string name="change_email">Email değiştir</string>
+    <string name="change_password">Parola değiştir</string>
+    <string name="send_password_reset_email">Parola yenileme mailini tekrar gönder</string>
+    <string name="remove_user">Kullanıcıyı sil</string>
+    <string name="new_pass">Yeni parola</string>
     <string name="title_activity_profile">Firebase</string>
 
     <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_name">Fullname</string>
-    <string name="btn_login">LOGIN</string>
-    <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
-    <string name="btn_link_to_login">Already registered. Login Me!</string>
+    <string name="hint_password">Parola</string>
+    <string name="hint_name">İsim/Soyisim</string>
+    <string name="btn_login">GİRİŞ</string>
+    <string name="btn_link_to_register">Üye ol</string>
+    <string name="btn_link_to_login">Zaten kayıtlı. Giriş yap!</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
-    <string name="btn_forgot_password">Forgot your password?</string>
-    <string name="btn_reset_password">Reset Password</string>
-    <string name="btn_back"><![CDATA[<< Back]]></string>
-    <string name="hint_new_email">New Email</string>
-    <string name="btn_change">Change</string>
-    <string name="btn_send">Send</string>
-    <string name="btn_remove">Remove</string>
-    <string name="btn_sign_out">Sign Out</string>
-    <string name="lbl_forgot_password">Forgot password?</string>
-    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="btn_forgot_password">Parolanızı mı unuttunuz?</string>
+    <string name="btn_reset_password">parolamı sıfırla</string>
+    <string name="btn_back"><![CDATA[<< Geri]]></string>
+    <string name="hint_new_email">Yeni Email</string>
+    <string name="btn_change">Değiştir</string>
+    <string name="btn_send">Gönder</string>
+    <string name="btn_remove">Sil</string>
+    <string name="btn_sign_out">Çıkış yap</string>
+    <string name="lbl_forgot_password">Parolanızı mı unuttunuz?</string>
+    <string name="forgot_password_msg">Şifre sıfırlama talimatlarını göndermek için kayıtlı e-posta adresinize ihtiyacımız var.</string>
 
 </resources>
