@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <group >
+        <item
+            android:id="@+id/settings"
+            android:checkable="false"
+            android:icon="@mipmap/usersettings"
+            android:onClick="hesapayarlari"
+            android:title="Hesap Ayarları" />
+        <item
+            android:id="@+id/appsettings"
+            android:checkable="false"
+
+            android:icon="@mipmap/appsettings"
+            android:onClick="appSettings"
+            android:title="Uygulama ayarları" />
+    </group>
+
+    <item
+        android:enabled="false"
+        />
+    
+
+    <group>
+        <item
+
+            android:id="@+id/sign_out_menu"
+            android:icon="@android:drawable/ic_lock_power_off"
+            android:onClick="sign_out"
+            android:title="Çıkış yap" />
+    </group>
+
+</menu>
