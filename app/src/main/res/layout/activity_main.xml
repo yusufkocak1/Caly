@@ -70,11 +70,12 @@
                         android:background="@android:color/holo_red_light"
                         android:gravity="center_horizontal"
                         android:text="^"
+                        android:onClick="savebtn"
                         android:textSize="50dp" />
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/günlük"
+                    android:id="@+id/daily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

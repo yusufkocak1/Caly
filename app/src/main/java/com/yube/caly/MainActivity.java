@@ -11,10 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.yube.caly.mongoAdapter.getDataAdapter;
+import com.yube.caly.mongoAdapter.setDataAdapter;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -23,11 +26,14 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private HorizontalCalendar horizontalCalendar;
+    EditText dailyET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        visualItem();
+
 
 
         Bundle extras = getIntent().getExtras();
@@ -36,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             newString = null;
         } else {
             newString = extras.getString("mesaj");
-            viewDiaog dialog = new viewDiaog();
+            viewDialog dialog = new viewDialog();
             dialog.showdialog(this, newString);
         }
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDateSelected(Date date, int position) {
                 Toast.makeText(MainActivity.this, DateFormat.getDateInstance().format(date) + " is selected!", Toast.LENGTH_SHORT).show();
+                new getDataAdapter(MainActivity.this).execute("http://192.168.0.150:1000/api/status");
             }
 
         });
@@ -84,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void visualItem() {
+        dailyET=(EditText) findViewById(R.id.daily);
     }
 
     public void sign_out(MenuItem item) {
@@ -119,8 +130,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void savebtn(View view) {
+        viewDialog dialog=new viewDialog();
+        setDataAdapter mongoobject=new setDataAdapter();
+        if(dailyET.getText().toString()!="") {
 
-    class viewDiaog {
+            new setDataAdapter().execute("http://192.168.0.150:1000/api/status",dailyET.getText().toString(),DateFormat.getDateInstance().format(new Date()));;
+            dialog.showdialog(MainActivity.this,"kayıt başarılı");
+        }
+        else {
+            dialog.showdialog(MainActivity.this,"Lütfen Günlüğünüzü boş bırakmayın");
+
+        }
+    }
+
+
+    class viewDialog {
 
         public void showdialog(Activity activity, String message) {
             final Dialog dialog = new Dialog(activity);
