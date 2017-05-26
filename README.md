@@ -1,0 +1,2 @@
+# Caly
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b2d0f8ccab344a8ba8569f5552b678c2)](https://www.codacy.com/app/yusufkocak.53/Caly?utm_source=github.com&utm_medium=referral&utm_content=yusufkocak1/Caly&utm_campaign=badger)
