@@ -2,85 +2,81 @@ package com.yube.caly.mongoAdapter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
+import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.yube.caly.contact.dailyContact;
+import com.yube.caly.singleton;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by yusuf on 23.05.2017.
  */
 
-public class getDataAdapter extends AsyncTask<String, Void, String> {
+public class getDataAdapter  {
 
-    public getDataAdapter(Activity activity) {
+    ArrayList<dailyContact> arrayList=new ArrayList<>();
+    String selectUrl="http://192.168.0.150:1000/api/status";
+
+    public getDataAdapter(Activity activity,String url) {
         this.activity = activity;
+        this.selectUrl=url;
+
     }
 
     Activity activity;
     ProgressDialog progressDialog;
     String mResult="unsuccess";
 
-    @Override
-    protected void onPreExecute() {
 
-        super.onPreExecute();
 
-        progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage("Loading data...");
-        progressDialog.show();
-    }
+    public ArrayList<dailyContact> getArrayList() {
 
-    @Override
-    protected String doInBackground(String... params) {
 
-        try {
-            return getData(params[0]);
-        } catch (IOException ex) {
-            return "Network error !";
-        }
-    }
+        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, selectUrl,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        int count=0;
+                        while (count<response.length()){
+                            try {
+                                JSONObject  jsonObject = response.getJSONObject(count);
 
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
+                                dailyContact dailyContact =new dailyContact(
+                                        jsonObject.getString("daily"),
+                                        jsonObject.getString("daily"),
+                                        jsonObject.getString("daily")
 
-        //set data response to textView
+                                );
 
-    }
 
-    private String getData(String urlPath) throws IOException {
-        StringBuilder result = new StringBuilder();
-        BufferedReader bufferedReader =null;
+                                arrayList.add(dailyContact);
+                                count++;
 
-        try {
-            //Initialize and config request, then connect to server
-            URL url = new URL(urlPath);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(10000 /* milliseconds */);
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("Content-Type", "application/json");// set header
-            urlConnection.connect();
 
-            //Read data response from server
-            InputStream inputStream = urlConnection.getInputStream();
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                result.append(line).append("\n");
-            }
-
-        } finally {
-            if (bufferedReader != null) {
-                bufferedReader.close();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(activity,"Error...",Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
             }
         }
 
-        return result.toString();
+        );
+        singleton.getmInstance(activity).addTorequestque(jsonArrayRequest);
+        return arrayList;
     }
 }

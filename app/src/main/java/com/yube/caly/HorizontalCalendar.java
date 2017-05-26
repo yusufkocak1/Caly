@@ -43,7 +43,11 @@ public class HorizontalCalendar {
                 int position = calendarView.getPositionOfCenterItem();
 
                 if (calendarListener != null) {
-                    calendarListener.onDateSelected(mListDays.get(position), position);
+                    try {
+                        calendarListener.onDateSelected(mListDays.get(position), position);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }

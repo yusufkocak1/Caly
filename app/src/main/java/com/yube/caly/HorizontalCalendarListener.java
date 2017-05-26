@@ -8,7 +8,7 @@ import java.util.Date;
 
 public abstract class HorizontalCalendarListener {
 
-    public abstract void onDateSelected(Date date, int position);
+    public abstract void onDateSelected(Date date, int position) throws InterruptedException;
 
     public void onCalendarScroll(HorizontalCalendarView calendarView, int dx, int dy){}
 

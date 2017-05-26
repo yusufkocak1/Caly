@@ -2,6 +2,7 @@ package com.yube.caly;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,10 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.yube.caly.contact.dailyContact;
 import com.yube.caly.mongoAdapter.getDataAdapter;
 import com.yube.caly.mongoAdapter.setDataAdapter;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private HorizontalCalendar horizontalCalendar;
     EditText dailyET;
+    private ArrayList<dailyContact> dataArray=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +80,30 @@ public class MainActivity extends AppCompatActivity {
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
-            public void onDateSelected(Date date, int position) {
+            public void onDateSelected(Date date, int position) throws InterruptedException {
                 Toast.makeText(MainActivity.this, DateFormat.getDateInstance().format(date) + " is selected!", Toast.LENGTH_SHORT).show();
-                new getDataAdapter(MainActivity.this).execute("http://192.168.0.150:1000/api/status");
-            }
+
+                 getDataAdapter task = new getDataAdapter(MainActivity.this,"http://192.168.0.150:1000/api/status");
+                final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+                progressDialog.setMessage("load data...");
+                progressDialog.show();
+                dataArray = task.getArrayList();
+                dailyET.setText(dataArray.get(0).getDaily());
+
+
+
+
+
+
+                }
+
+
+
+
 
         });
+
+
         horizontalCalendar.goToday(false);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
             new setDataAdapter().execute("http://192.168.0.150:1000/api/status",dailyET.getText().toString(),DateFormat.getDateInstance().format(new Date()));;
             dialog.showdialog(MainActivity.this,"kayıt başarılı");
+
         }
         else {
             dialog.showdialog(MainActivity.this,"Lütfen Günlüğünüzü boş bırakmayın");
