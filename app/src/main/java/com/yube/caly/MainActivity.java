@@ -26,11 +26,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivity extends AppCompatActivity {
 
     private HorizontalCalendar horizontalCalendar;
     EditText dailyET;
+    getDataAdapter task = new getDataAdapter(MainActivity.this,"http://192.168.0.150:1000/api/status");
     private ArrayList<dailyContact> dataArray=new ArrayList<>();
+    String savedt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         visualItem();
 
+        dataArray = task.getArrayList();
 
 
         Bundle extras = getIntent().getExtras();
@@ -83,13 +89,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDateSelected(Date date, int position) throws InterruptedException {
                 Toast.makeText(MainActivity.this, DateFormat.getDateInstance().format(date) + " is selected!", Toast.LENGTH_SHORT).show();
 
-                 getDataAdapter task = new getDataAdapter(MainActivity.this,"http://192.168.0.150:1000/api/status");
-                final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-                progressDialog.setMessage("load data...");
-                progressDialog.show();
-                dataArray = task.getArrayList();
-                dailyET.setText(dataArray.get(0).getDaily());
+               
+                savedt=DateFormat.getDateInstance().format(date).toString();
 
+                dailyset(DateFormat.getDateInstance().format(date).toString());
 
 
 
@@ -112,6 +115,18 @@ public class MainActivity extends AppCompatActivity {
                 horizontalCalendar.goToday(false);
             }
         });
+
+    }
+
+    private void dailyset(String date) {
+        for (dailyContact dailyContacts :dataArray){
+
+            if (dailyContacts.getDate().equals(date)){
+                dailyET.setText(dailyContacts.getDaily());
+
+            }
+
+        }
 
     }
 
@@ -157,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         setDataAdapter mongoobject=new setDataAdapter();
         if(dailyET.getText().toString()!="") {
 
-            new setDataAdapter().execute("http://192.168.0.150:1000/api/status",dailyET.getText().toString(),DateFormat.getDateInstance().format(new Date()));;
+            new setDataAdapter().execute("http://192.168.0.150:1000/api/status",dailyET.getText().toString(),savedt);;
             dialog.showdialog(MainActivity.this,"kayıt başarılı");
 
         }

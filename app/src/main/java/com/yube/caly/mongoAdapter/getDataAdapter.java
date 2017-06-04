@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class getDataAdapter  {
 
-    ArrayList<dailyContact> arrayList=new ArrayList<>();
+    public ArrayList<dailyContact> arrayList=new ArrayList<>();
     String selectUrl="http://192.168.0.150:1000/api/status";
 
     public getDataAdapter(Activity activity,String url) {
@@ -41,7 +41,7 @@ public class getDataAdapter  {
     public ArrayList<dailyContact> getArrayList() {
 
 
-        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, selectUrl,
+        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, selectUrl, (String)null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -52,8 +52,8 @@ public class getDataAdapter  {
 
                                 dailyContact dailyContact =new dailyContact(
                                         jsonObject.getString("daily"),
-                                        jsonObject.getString("daily"),
-                                        jsonObject.getString("daily")
+                                        jsonObject.getString("date"),
+                                        jsonObject.getString("_id")
 
                                 );
 
@@ -66,6 +66,7 @@ public class getDataAdapter  {
                                 e.printStackTrace();
                             }
                         }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
