@@ -2,7 +2,6 @@ package com.yube.caly;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -20,7 +19,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.yube.caly.contact.dailyContact;
-import com.yube.caly.contact.userinfoContact;
+
 import com.yube.caly.mongoAdapter.getDataAdapter;
 import com.yube.caly.mongoAdapter.setDataAdapter;
 
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import static java.lang.Thread.sleep;
+
 
 public class MainActivity extends AppCompatActivity {
 
