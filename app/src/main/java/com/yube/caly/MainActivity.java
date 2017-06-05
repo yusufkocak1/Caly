@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.yube.caly.contact.dailyContact;
+import com.yube.caly.contact.userinfoContact;
 import com.yube.caly.mongoAdapter.getDataAdapter;
 import com.yube.caly.mongoAdapter.setDataAdapter;
 
@@ -32,17 +35,19 @@ public class MainActivity extends AppCompatActivity {
 
     private HorizontalCalendar horizontalCalendar;
     EditText dailyET;
-    getDataAdapter task = new getDataAdapter(MainActivity.this,"http://192.168.0.150:1000/api/status");
-    private ArrayList<dailyContact> dataArray=new ArrayList<>();
+    getDataAdapter task = new getDataAdapter(MainActivity.this, "http://192.168.0.150:1000/api/status");
+    private ArrayList<dailyContact> dataArray = new ArrayList<>();
     String savedt;
-
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         visualItem();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        username = preferences.getString("username", "N/A");
         dataArray = task.getArrayList();
 
 
@@ -89,19 +94,13 @@ public class MainActivity extends AppCompatActivity {
             public void onDateSelected(Date date, int position) throws InterruptedException {
                 Toast.makeText(MainActivity.this, DateFormat.getDateInstance().format(date) + " is selected!", Toast.LENGTH_SHORT).show();
 
-               
-                savedt=DateFormat.getDateInstance().format(date).toString();
+
+                savedt = DateFormat.getDateInstance().format(date).toString();
 
                 dailyset(DateFormat.getDateInstance().format(date).toString());
 
 
-
-
-
-                }
-
-
-
+            }
 
 
         });
@@ -119,11 +118,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void dailyset(String date) {
-        for (dailyContact dailyContacts :dataArray){
+        dailyET.setText("");
+        for (dailyContact dailyContacts : dataArray) {
 
-            if (dailyContacts.getDate().equals(date)){
-                dailyET.setText(dailyContacts.getDaily());
+            if (dailyContacts.getUsername().equals(username)) {
+                if (dailyContacts.getDate().equals(date)) {
+                    dailyET.setText(dailyContacts.getDaily());
 
+                }
             }
 
         }
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void visualItem() {
-        dailyET=(EditText) findViewById(R.id.daily);
+        dailyET = (EditText) findViewById(R.id.daily);
     }
 
     public void sign_out(MenuItem item) {
@@ -168,16 +170,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void savebtn(View view) {
-        viewDialog dialog=new viewDialog();
-        setDataAdapter mongoobject=new setDataAdapter();
-        if(dailyET.getText().toString()!="") {
+        viewDialog dialog = new viewDialog();
 
-            new setDataAdapter().execute("http://192.168.0.150:1000/api/status",dailyET.getText().toString(),savedt);;
-            dialog.showdialog(MainActivity.this,"kayıt başarılı");
+        if (!dailyET.getText().toString().equals("")) {
 
-        }
-        else {
-            dialog.showdialog(MainActivity.this,"Lütfen Günlüğünüzü boş bırakmayın");
+            setDataAdapter setadapter =new setDataAdapter();
+            setadapter.execute("http://192.168.0.150:1000/api/status", dailyET.getText().toString(), savedt, username);
+
+            dialog.showdialog(MainActivity.this, "kayıt başarılı");
+
+        } else {
+            dialog.showdialog(MainActivity.this, "Lütfen Günlüğünüzü boş bırakmayın");
 
         }
     }

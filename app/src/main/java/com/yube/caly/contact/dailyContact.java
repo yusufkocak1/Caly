@@ -4,9 +4,9 @@ package com.yube.caly.contact;
  * Created by yusuf on 26.05.2017.
  */
 
-public class dailyContact  {
+public class dailyContact {
 
-    private  String daily,date,username;
+    private String daily, date, username;
 
     public dailyContact(String daily, String date, String username) {
         setDaily(daily);
@@ -14,7 +14,7 @@ public class dailyContact  {
         setUsername(username);
 
 
-            }
+    }
 
     public String getDaily() {
         return daily;

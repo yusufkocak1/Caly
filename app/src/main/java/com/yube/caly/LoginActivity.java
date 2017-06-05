@@ -1,7 +1,9 @@
 package com.yube.caly;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +43,13 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = preferences.edit();
+
+            editor.putString("username",FirebaseAuth.getInstance().getCurrentUser().getEmail().toString());
+            editor.commit();
+
+
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }

@@ -20,12 +20,12 @@ import java.net.URL;
  * Created by yusuf on 23.05.2017.
  */
 
-public class setDataAdapter  extends AsyncTask<String, Void, String> {
-    String mresult="unsucces",
-           data="boş kayıt";
+public class setDataAdapter extends AsyncTask<String, Void, String> {
+    String mresult = "unsucces",
+            data = "boş kayıt";
 
     public String setdata(String data) {
-        this.data=data;
+        this.data = data;
 
         return mresult;
     }
@@ -45,7 +45,7 @@ public class setDataAdapter  extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
         try {
-            return postData(params[0],params[1],params[2]);
+            return postData(params[0], params[1], params[2], params[3]);
         } catch (IOException ex) {
             return "Network error !";
         } catch (JSONException ex) {
@@ -57,14 +57,14 @@ public class setDataAdapter  extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
-        mresult=result;
+        mresult = result;
 
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
     }
 
-    private String postData(String urlPath,String data,String date) throws IOException, JSONException {
+    private String postData(String urlPath, String data, String date, String username) throws IOException, JSONException {
 
         StringBuilder result = new StringBuilder();
         BufferedWriter bufferedWriter = null;
@@ -73,8 +73,9 @@ public class setDataAdapter  extends AsyncTask<String, Void, String> {
         try {
             //Create data to send to server
             JSONObject dataToSend = new JSONObject();
-            dataToSend.put("daily",data);
-            dataToSend.put("date",date);
+            dataToSend.put("daily", data);
+            dataToSend.put("date", date);
+            dataToSend.put("username", username);
 
 
             //Initialize and config request, then connect to server.

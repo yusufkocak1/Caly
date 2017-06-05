@@ -21,39 +21,38 @@ import java.util.ArrayList;
  * Created by yusuf on 23.05.2017.
  */
 
-public class getDataAdapter  {
+public class getDataAdapter {
 
-    public ArrayList<dailyContact> arrayList=new ArrayList<>();
-    String selectUrl="http://192.168.0.150:1000/api/status";
+    public ArrayList<dailyContact> arrayList = new ArrayList<>();
+    String selectUrl = "http://192.168.0.150:1000/api/status";
 
-    public getDataAdapter(Activity activity,String url) {
+    public getDataAdapter(Activity activity, String url) {
         this.activity = activity;
-        this.selectUrl=url;
+        this.selectUrl = url;
 
     }
 
     Activity activity;
     ProgressDialog progressDialog;
-    String mResult="unsuccess";
-
+    String mResult = "unsuccess";
 
 
     public ArrayList<dailyContact> getArrayList() {
 
 
-        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, selectUrl, (String)null,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, selectUrl, (String) null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        int count=0;
-                        while (count<response.length()){
+                        int count = 0;
+                        while (count < response.length()) {
                             try {
-                                JSONObject  jsonObject = response.getJSONObject(count);
+                                JSONObject jsonObject = response.getJSONObject(count);
 
-                                dailyContact dailyContact =new dailyContact(
+                                dailyContact dailyContact = new dailyContact(
                                         jsonObject.getString("daily"),
                                         jsonObject.getString("date"),
-                                        jsonObject.getString("_id")
+                                        jsonObject.getString("username")
 
                                 );
 
@@ -71,7 +70,7 @@ public class getDataAdapter  {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(activity,"Error...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Error...", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         }
