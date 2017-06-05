@@ -121,6 +121,11 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                    SharedPreferences.Editor editor = preferences.edit();
+
+                                    editor.putString("username",FirebaseAuth.getInstance().getCurrentUser().getEmail().toString());
+                                    editor.commit();
                                     finish();
                                 }
                             }

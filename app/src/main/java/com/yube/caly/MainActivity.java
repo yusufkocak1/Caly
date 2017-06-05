@@ -29,7 +29,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
     private HorizontalCalendar horizontalCalendar;
@@ -142,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseAuth auth;
                 auth = FirebaseAuth.getInstance();
                 auth.signOut();
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.remove("username");
+                editor.commit();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 return true;
             }
@@ -173,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!dailyET.getText().toString().equals("")) {
 
-            setDataAdapter setadapter =new setDataAdapter();
+            setDataAdapter setadapter = new setDataAdapter();
             setadapter.execute("http://192.168.0.150:1000/api/status", dailyET.getText().toString(), savedt, username);
 
             dialog.showdialog(MainActivity.this, "kayıt başarılı");
